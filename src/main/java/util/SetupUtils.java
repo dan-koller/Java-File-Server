@@ -76,12 +76,10 @@ public class SetupUtils {
                 throw new RuntimeException();
             }
         } catch (Exception e) {
-            System.out.println("Map path is not set!");
-            System.out.print("Please enter the path to the map file: ");
+            System.out.println("Setting idMap path...");
 
-            String path = scanner.nextLine();
+            String path = System.getProperty("user.dir") + "/src/main/java/server/config/map.bin";
             writeProperty("map.path", path);
-            // Database reads path from file because the static methods can't handle a passed value from here
         }
     }
 

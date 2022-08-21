@@ -25,7 +25,8 @@ public class ServerUtils {
     }
 
     public static Object getIdMap() {
-        Object obj = null;
+        Object obj;
+
         try {
             FileInputStream fis = new FileInputStream(ID_MAP_PATH);
             BufferedInputStream bis = new BufferedInputStream(fis);
@@ -33,7 +34,9 @@ public class ServerUtils {
             obj = ois.readObject();
             ois.close();
         } catch (IOException | ClassNotFoundException e) {
-//            System.out.println("Error reading the id map: " + e.getMessage());
+            System.out.println("No id map found! Creating new one...");
+            obj = new HashMap<>();
+            saveIdMap(obj);
         }
 
         return obj instanceof HashMap ? obj : new HashMap<>();

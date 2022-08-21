@@ -1,6 +1,7 @@
 package client;
 
 import util.ClientUtils;
+import util.SetupUtils;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -12,8 +13,8 @@ import java.util.Scanner;
 
 public class Client {
 
-    private final String IP_ADDRESS;
-    private final int PORT;
+    private String IP_ADDRESS;
+    private int PORT;
 
     private final Scanner scanner = new Scanner(System.in);
 
@@ -22,9 +23,13 @@ public class Client {
     String serverFileName;
     String nameOrId;
 
-    public Client(String ipAddress, int port) {
-        this.IP_ADDRESS = ipAddress;
-        this.PORT = port;
+    public Client() {
+        try {
+            this.IP_ADDRESS = SetupUtils.readProperty("app.address");
+            this.PORT = Integer.parseInt(SetupUtils.readProperty("app.port"));
+        } catch (IOException e) {
+            System.out.println("No config file found. Please run server setup first.");
+        }
     }
 
     public void start() {

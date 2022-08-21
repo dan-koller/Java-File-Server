@@ -1,6 +1,7 @@
 package server;
 
 import util.ServerUtils;
+import util.SetupUtils;
 
 import java.io.*;
 import java.net.InetAddress;
@@ -16,9 +17,10 @@ public class Server {
     private boolean isRunning = true;
     public static HashMap<String, String> idMap;
 
-    public Server(String ipAddress, int port) {
-        this.IP_ADDRESS = ipAddress;
-        this.PORT = port;
+    public Server() {
+        this.IP_ADDRESS = SetupUtils.setUpServerAddress();
+        this.PORT = SetupUtils.setUpServerPort();
+        SetupUtils.setUpIdMap();
     }
 
     @SuppressWarnings("unchecked")

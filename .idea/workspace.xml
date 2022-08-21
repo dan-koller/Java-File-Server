@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0fbfce83-025f-443b-8d18-3362deecd6cd" name="Changes" comment="Tweaked configuration to automatically set config map path">
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/Java_File_Server___Main_main___.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="0fbfce83-025f-443b-8d18-3362deecd6cd" name="Changes" comment="Added README and updated run configs" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -149,7 +146,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661064216799</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added README and updated run configs">
+      <created>1661066236967</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1661066236967</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -167,6 +171,7 @@
     <MESSAGE value="Initial commit. Not ready for use yet.&#10;&#10;It is mandatory to create the file indexing map on startup if there is no existing config map. Check corresponding Github issue." />
     <MESSAGE value="Added configuration setup on initial start&#10;&#10;This fixes the latest issues, where there was no config file available." />
     <MESSAGE value="Tweaked configuration to automatically set config map path" />
-    <option name="LAST_COMMIT_MESSAGE" value="Tweaked configuration to automatically set config map path" />
+    <MESSAGE value="Added README and updated run configs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added README and updated run configs" />
   </component>
 </project>

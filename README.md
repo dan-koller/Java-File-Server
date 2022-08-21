@@ -1,7 +1,7 @@
 # Java File Server
 
 A simple file server that allows sending, reading and deleting files. The original idea was based on a project
-on a Jetbrains Academy track. I took this further and added the ability to specify the local database path and added
+on a [Jetbrains Academy](https://hyperskill.org/projects/52) track. I took this further and added the ability to specify the local database path and added
 more possibilities to customize the software on your system.
 
 ## Requirements:

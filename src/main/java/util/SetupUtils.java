@@ -17,18 +17,13 @@ public class SetupUtils {
     public static String setUpServerAddress() {
         try {
             String property = readProperty("app.address");
-            if (property.isBlank()) {
-                throw new RuntimeException();
-            } else {
-                return property;
-            }
+            if (property.isBlank()) throw new RuntimeException();
+            else return property;
         } catch (Exception e) {
             System.out.print("Please enter the IP address of your server or press enter for default (127.0.0.1): ");
             String address = scanner.nextLine();
 
-            if (address.isBlank()) {
-                address = "127.0.0.1"; // default
-            }
+            if (address.isBlank()) address = "127.0.0.1"; // default
 
             writeProperty("app.address", address);
             return address;
@@ -47,7 +42,7 @@ public class SetupUtils {
             int portNumber;
 
             while (true) {
-                System.out.print("Please enter Port your server should be listening or press enter for default (23456): ");
+                System.out.print("Please enter port your server should be listening or press enter for default (23456): ");
                 String port = scanner.nextLine();
 
                 if (port.isBlank()) {
@@ -78,8 +73,25 @@ public class SetupUtils {
         } catch (Exception e) {
             System.out.println("Setting idMap path...");
 
-            String path = System.getProperty("user.dir") + "/src/main/java/server/config/map.bin";
+            String path = System.getProperty("user.dir") + "/server/config/map.bin";
             writeProperty("map.path", path);
+        }
+    }
+
+    public static String setUpFileStorage(String path) {
+        String filePath = System.getProperty("user.dir") + path;
+        File file = new File(filePath);
+        // If file path exists, return the path
+        if (file.exists()) {
+            return filePath;
+        } else {
+            // Otherwise, create the file path
+            if (file.mkdirs()) {
+                return filePath;
+            } else {
+                System.err.println("Could not create file path.");
+                return null;
+            }
         }
     }
 

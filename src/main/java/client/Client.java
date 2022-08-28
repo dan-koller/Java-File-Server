@@ -7,6 +7,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.EOFException;
 import java.io.IOException;
+import java.net.BindException;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Scanner;
@@ -28,7 +29,8 @@ public class Client {
             this.IP_ADDRESS = SetupUtils.readProperty("app.address");
             this.PORT = Integer.parseInt(SetupUtils.readProperty("app.port"));
         } catch (IOException e) {
-            System.out.println("No config file found. Please run server setup first.");
+            SetupUtils.setUpFileStorage("/client/data/");
+            System.out.println("Client setup finished! Please proceed with the server setup.");
         }
     }
 
@@ -65,7 +67,7 @@ public class Client {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("The server is not available. " + e.getMessage());
         }
     }
 

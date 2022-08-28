@@ -9,8 +9,8 @@ import java.util.HashMap;
 
 public class ServerUtils {
 
-    private static final String FILE_PATH = System.getProperty("user.dir") + "/src/main/java/server/data/";
-    private static final String ID_MAP_PATH = System.getProperty("user.dir") + "/src/main/java/server/config/map.bin";
+    private static final String FILE_PATH = SetupUtils.setUpFileStorage("/server/data/");
+    private static final String ID_MAP_PATH = SetupUtils.setUpFileStorage("/server/config/") + "map.bin";
 
     public static void saveIdMap(Object obj) {
         try {

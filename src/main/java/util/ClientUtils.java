@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class ClientUtils {
 
-    private static final String FILE_PATH = System.getProperty("user.dir") + "/src/main/java/client/data/";
+    private static final String FILE_PATH = SetupUtils.setUpFileStorage("/client/data/");
 
     public static void sendFile(String fileName, DataOutputStream output) throws IOException {
         String path = FILE_PATH + fileName;

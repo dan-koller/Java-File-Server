@@ -17,7 +17,6 @@ public class Client {
     private int PORT;
 
     private final Scanner scanner = new Scanner(System.in);
-
     private boolean isRunning = true;
     private String fileName;
 
@@ -33,6 +32,12 @@ public class Client {
         }
     }
 
+    /**
+     * Process the request from the client.
+     * The user can choose between sending, receiving or receiving a file.
+     * The response is sent to the client.
+     * After that the client terminates the connection.
+     */
     public void start() {
         try (
                 // Establish the connection
@@ -64,12 +69,17 @@ public class Client {
 
                 stop(input, output, socket);
             }
-
         } catch (IOException e) {
             System.out.println("The server is not available. " + e.getMessage());
         }
     }
 
+    /**
+     * Process the user action and return the command to be sent to the server.
+     *
+     * @param action The action from the user. The action is either "1" (GET), "2" (PUT) or "3" (DELETE).
+     * @return A command to be sent to the server.
+     */
     private String processUserAction(String action) {
         String command = "";
 
@@ -118,6 +128,14 @@ public class Client {
         return command;
     }
 
+    /**
+     * Process the server response and print the result to the user.
+     *
+     * @param command  The command that was sent to the server.
+     * @param response The response from the server.
+     * @param input    The input stream from the server.
+     * @throws IOException If an I/O error occurs.
+     */
     private void processServerResponse(String command, String response, DataInputStream input) throws IOException {
 
         String[] responseTokens = response.split(" ");
@@ -141,6 +159,14 @@ public class Client {
         }
     }
 
+    /**
+     * Stop the client and close the connection.
+     *
+     * @param input  The input stream from the server.
+     * @param output The output stream to the server.
+     * @param socket The socket to the server.
+     * @throws IOException If an I/O error occurs.
+     */
     public void stop(DataInputStream input, DataOutputStream output, Socket socket) throws IOException {
         // Close streams and socket
         input.close();

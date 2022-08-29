@@ -11,6 +11,13 @@ public class ClientUtils {
 
     private static final String FILE_PATH = SetupUtils.setUpFileStorage("/client/data/");
 
+    /**
+     * Send a file to the server.
+     *
+     * @param fileName The name of the file to be sent
+     * @param output   The output stream to the server
+     * @throws IOException If an I/O error occurs
+     */
     public static void sendFile(String fileName, DataOutputStream output) throws IOException {
         String path = FILE_PATH + fileName;
         byte[] fileBytes = Files.readAllBytes(Paths.get(path));
@@ -20,6 +27,12 @@ public class ClientUtils {
         output.flush();
     }
 
+    /**
+     * Receive a file from the server.
+     *
+     * @param input The input stream from the server
+     * @throws IOException If an I/O error occurs
+     */
     public static void receiveFile(DataInputStream input) throws IOException {
         int size = input.readInt();
         byte[] fileBytes = new byte[size];

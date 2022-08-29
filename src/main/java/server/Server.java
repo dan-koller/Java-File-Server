@@ -23,6 +23,12 @@ public class Server {
         SetupUtils.setUpIdMap();
     }
 
+    /**
+     * Process the request from the client. The server receives a command string from the client and processes it
+     * accordingly. The server then sends a response to the client.
+     * The user can terminate the connection by typing "exit" on the client side.
+     * This should be avoided in a production environment.
+     */
     @SuppressWarnings("unchecked")
     public void start() {
         try (
@@ -58,6 +64,16 @@ public class Server {
         }
     }
 
+    /**
+     * Handle the request from the client and return the response.
+     *
+     * @param requestTokens The request from the client as an array of strings to separate the command and the file/id.
+     * @param input         The input stream from the client.
+     * @param output        The output stream to the client.
+     * @param idMap         The map of ids to files to avoid collisions in case of similar file names.
+     * @return The response to the client as a string.
+     * @throws IOException If an error occurs while reading from the input stream.
+     */
     private String processRequest(String[] requestTokens, DataInputStream input,
                                   DataOutputStream output, HashMap<String, String> idMap) throws IOException {
         String response;
@@ -74,6 +90,14 @@ public class Server {
         return response;
     }
 
+    /**
+     * Stop the server.
+     *
+     * @param input  The input stream from the client.
+     * @param output The output stream to the client.
+     * @param socket The socket to the client.
+     * @param idMap  To save the map before closing the server.
+     */
     public void stop(DataInputStream input, DataOutputStream output,
                      Socket socket, HashMap<String, String> idMap) throws IOException {
         // Close streams and socket

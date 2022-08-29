@@ -14,6 +14,11 @@ public class SetupUtils {
     private static final Properties PROPERTIES = new Properties();
     private static final String FILE_NAME = System.getProperty("user.dir") + File.separator + "app.config";
 
+    /**
+     * Prompt the user to specify an address the server is running on.
+     *
+     * @return The address the server is running on
+     */
     public static String setUpServerAddress() {
         try {
             String property = readProperty("app.address");
@@ -30,19 +35,22 @@ public class SetupUtils {
         }
     }
 
+    /**
+     * Prompt the user to specify a port the server is running on.
+     *
+     * @return The port the server is running on.
+     */
     public static int setUpServerPort() {
         try {
             String property = readProperty("app.port");
-            if (property.isBlank()) {
-                throw new RuntimeException();
-            } else {
-                return Integer.parseInt(property);
-            }
+            if (property.isBlank()) throw new RuntimeException();
+            else return Integer.parseInt(property);
         } catch (Exception e) {
             int portNumber;
 
             while (true) {
-                System.out.print("Please enter port your server should be listening or press enter for default (23456): ");
+                System.out.print("Please enter the port your server should be listening " +
+                        "or press enter for default (23456): ");
                 String port = scanner.nextLine();
 
                 if (port.isBlank()) {
@@ -52,11 +60,8 @@ public class SetupUtils {
                     portNumber = Integer.parseInt(port);
                 }
 
-                if (portNumber > 65535) {
-                    System.err.println("Max port number reached. Please select a different port.");
-                } else {
-                    break;
-                }
+                if (portNumber > 65535) System.err.println("Max port number reached. Please select a different port.");
+                else break;
             }
 
             writeProperty("app.port", Integer.toString(portNumber));
@@ -64,12 +69,13 @@ public class SetupUtils {
         }
     }
 
+    /**
+     * Sets up the path to the id mapping file.
+     */
     public static void setUpIdMap() {
         try {
             String property = readProperty("map.path");
-            if (property.isBlank()) {
-                throw new RuntimeException();
-            }
+            if (property.isBlank()) throw new RuntimeException();
         } catch (Exception e) {
             System.out.println("Setting idMap path...");
 
@@ -78,23 +84,33 @@ public class SetupUtils {
         }
     }
 
+    /**
+     * Sets up the storage path for the client and server.
+     *
+     * @param path The path to the storage.
+     * @return The absolute path to the storage as a string.
+     */
     public static String setUpFileStorage(String path) {
         String filePath = System.getProperty("user.dir") + path;
         File file = new File(filePath);
         // If file path exists, return the path
-        if (file.exists()) {
-            return filePath;
-        } else {
+        if (file.exists()) return filePath;
+        else {
             // Otherwise, create the file path
-            if (file.mkdirs()) {
-                return filePath;
-            } else {
+            if (file.mkdirs()) return filePath;
+            else {
                 System.err.println("Could not create file path.");
                 return null;
             }
         }
     }
 
+    /**
+     * Reads a property from the properties file.
+     *
+     * @param property The property to read.
+     * @return The property value.
+     */
     public static String readProperty(String property) throws IOException {
         String value;
         // Try to read configuration file
@@ -104,13 +120,16 @@ public class SetupUtils {
         }
 
         // Check if property is set
-        if (value == null || value.equals("")) {
-            throw new IOException();
-        } else {
-            return value;
-        }
+        if (value == null || value.equals("")) throw new IOException();
+        else return value;
     }
 
+    /**
+     * Writes a property to the properties file.
+     *
+     * @param property The property to write.
+     * @param value    The value to write.
+     */
     @SuppressWarnings("resource")
     private static void writeProperty(String property, String value) {
         /*

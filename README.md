@@ -29,7 +29,7 @@ gradle build
 
 I assume that you know how to use the command line.
 
-1. Start the client
+1. Start the client to initialize and create the folder structure (only on first start)
     ```bash
     java -jar client.jar
     ```
@@ -50,8 +50,8 @@ I assume that you know how to use the command line.
 
 ## Usage:
 
-- Start the server
-- Start the client
+- Start the server (see above)
+- Start the client (see above)
 - Select between sending, reading and deleting files
 
 _Make sure that the files you try to send are located in the `client/data/` folder. You can find the received files

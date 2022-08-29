@@ -111,6 +111,7 @@ public class SetupUtils {
         }
     }
 
+    @SuppressWarnings("resource")
     private static void writeProperty(String property, String value) {
         /*
          * IOExceptions get checked here because if there is no file,

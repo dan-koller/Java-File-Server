@@ -71,7 +71,7 @@ public class ServerUtils {
                 output.writeUTF(response);
             }
         } catch (IOException e) {
-//            System.out.println("Error reading the file: " + e.getMessage());
+            System.out.println("Error reading the file: " + e.getMessage());
         }
 
         return response;
@@ -142,7 +142,7 @@ public class ServerUtils {
             }
             output.writeUTF(response);
         } catch (IOException e) {
-//            System.out.println("Error deleting the file: " + e.getMessage());
+            System.out.println("Error deleting the file: " + e.getMessage());
         }
         return response;
     }

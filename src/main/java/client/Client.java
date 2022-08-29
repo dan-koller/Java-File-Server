@@ -7,7 +7,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.EOFException;
 import java.io.IOException;
-import java.net.BindException;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Scanner;
@@ -20,17 +19,17 @@ public class Client {
     private final Scanner scanner = new Scanner(System.in);
 
     private boolean isRunning = true;
-    String fileName;
-    String serverFileName;
-    String nameOrId;
+    private String fileName;
 
     public Client() {
         try {
+            // Create necessary directories for the client
+            SetupUtils.setUpFileStorage("/client/data/");
+            // Set address and port
             this.IP_ADDRESS = SetupUtils.readProperty("app.address");
             this.PORT = Integer.parseInt(SetupUtils.readProperty("app.port"));
         } catch (IOException e) {
-            SetupUtils.setUpFileStorage("/client/data/");
-            System.out.println("Client setup finished! Please proceed with the server setup.");
+            System.err.println("Server address or port is not specified in the config file!" + e.getMessage());
         }
     }
 
@@ -74,10 +73,11 @@ public class Client {
     private String processUserAction(String action) {
         String command = "";
 
+        String nameOrId;
         switch (action) {
             case "1" -> {
                 command = "GET";
-                System.out.print("Do you want to get the file by name or by id (1 - name, 2 - id):");
+                System.out.print("Do you want to get the file by name or by id (1 - name, 2 - id): ");
                 nameOrId = scanner.nextLine();
                 if (nameOrId.equals("1")) {
                     nameOrId = "BY_NAME";
@@ -94,7 +94,7 @@ public class Client {
                 System.out.print("Enter filename: ");
                 fileName = scanner.nextLine();
                 System.out.print("Enter name of the file to be saved on server: ");
-                serverFileName = scanner.nextLine();
+                String serverFileName = scanner.nextLine();
                 if (serverFileName.trim().length() == 0) serverFileName = "*";
                 command += " " + serverFileName;
             }
